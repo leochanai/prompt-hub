@@ -49,29 +49,30 @@ struct ModelEditorSheet: View {
             // Content (custom layout, no Form background)
             VStack(alignment: .leading, spacing: AppLayout.gridVSpacing + 2) {
                 Grid(alignment: .leading, horizontalSpacing: AppLayout.gridHSpacing, verticalSpacing: AppLayout.gridVSpacing) {
-                    // Name
+                    // Row 1: 名称
                     GridRow(alignment: .center) {
                         Text("模型名称" as LocalizedStringKey)
                             .frame(width: labelWidth, alignment: .leading)
                         HStack(spacing: 0) {
-                            TextField("", text: $name)
+                            TextField("请输入模型名称", text: $name)
                                 .textFieldStyle(.roundedBorder)
                             Spacer(minLength: 0)
                         }
-                        .frame(width: controlWidth)
+                        .frame(width: controlWidth, alignment: .leading)
                         .gridColumnAlignment(.leading)
                     }
 
                     if !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && name.count > 40 {
-                        GridRow {
+                        GridRow(alignment: .center) {
                             Color.clear.frame(width: labelWidth)
                             Text("名称不能超过40个字符" as LocalizedStringKey)
                                 .font(.caption)
                                 .foregroundStyle(.red)
+                                .frame(width: controlWidth, alignment: .leading)
                         }
                     }
 
-                    // Type
+                    // Row 2: 类型
                     GridRow(alignment: .center) {
                         Text("模型类型" as LocalizedStringKey)
                             .frame(width: labelWidth, alignment: .leading)
@@ -90,39 +91,51 @@ struct ModelEditorSheet: View {
                             .pickerStyle(.segmented)
                             Spacer(minLength: 0)
                         }
-                        .frame(width: controlWidth)
-                        .padding(.leading, leadingAlignFix)
+                        .frame(width: controlWidth, alignment: .leading)
                         .gridColumnAlignment(.leading)
                     }
 
-                    // Vendor (label stays fixed; right side stacks dropdown + optional custom name)
-                    GridRow(alignment: .top) {
+                    // Row 3: 供应商
+                    GridRow(alignment: .center) {
                         Text("供应商" as LocalizedStringKey)
                             .frame(width: labelWidth, alignment: .leading)
-                        VStack(alignment: .leading, spacing: AppLayout.inlineGroupVSpacing) {
-                            HStack(spacing: 0) {
-                                Picker("" as LocalizedStringKey, selection: $selectedVendor) {
-                                    ForEach(ModelVendor.allCases, id: \.self) { vendor in
-                                        Text(vendor.localizedTitleKey)
-                                            .tag(vendor)
-                                    }
+                        HStack(spacing: 0) {
+                            Picker("" as LocalizedStringKey, selection: $selectedVendor) {
+                                ForEach(ModelVendor.allCases, id: \.self) { vendor in
+                                    Text(vendor.localizedTitleKey)
+                                        .tag(vendor)
                                 }
-                                .pickerStyle(.menu)
-                                Spacer(minLength: 0)
                             }
-                            .padding(.leading, leadingAlignFix)
+                            .pickerStyle(.menu)
+                            Spacer(minLength: 0)
+                        }
+                        .frame(width: controlWidth, alignment: .leading)
+                        .gridColumnAlignment(.leading)
+                    }
 
-                            if selectedVendor == .custom {
-                                HStack(spacing: 0) {
-                                    TextField("请输入供应商名称" as LocalizedStringKey, text: $customVendorName)
-                                        .textFieldStyle(.roundedBorder)
-                                    Spacer(minLength: 0)
-                                }
-                                .padding(.leading, leadingAlignFix)
+                    // Row 4: 自定义供应商名称（仅在选择“自定义”时显示）
+                    if selectedVendor == .custom {
+                        GridRow(alignment: .center) {
+                        Text("")
+                            .frame(width: labelWidth, alignment: .leading)
+                        HStack(spacing: 0) {
+                            TextField(String(localized: "请输入供应商名称"), text: $name)
+                                .textFieldStyle(.roundedBorder)
+                            Spacer(minLength: 0)
+                        }
+                        .frame(width: controlWidth, alignment: .leading)
+                        .gridColumnAlignment(.leading)
+                        }
+
+                        if !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && name.count > 40 {
+                            GridRow(alignment: .center) {
+                                Color.clear.frame(width: labelWidth)
+                                Text("供应商名称不能超过40个字符" as LocalizedStringKey)
+                                    .font(.caption)
+                                    .foregroundStyle(.red)
+                                    .frame(width: controlWidth, alignment: .leading)
                             }
                         }
-                        .frame(width: controlWidth)
-                        .gridColumnAlignment(.leading)
                     }
                 }
                 .padding(AppLayout.contentPadding)

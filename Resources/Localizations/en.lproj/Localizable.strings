@@ -41,19 +41,21 @@
 "模型类型" = "Model Type";
 "供应商" = "Provider";
 "名称不能超过40个字符" = "Name cannot exceed 40 characters";
+"供应商名称不能超过40个字符" = "Provider name cannot exceed 40 characters";
 "提示" = "Alert";
 "模型名称已存在，请使用其他名称" = "Model name already exists, please use another name";
 
 /* Vendor Names */
 "供应商.OpenAI" = "OpenAI";
-"供应商.Anthropic" = "Anthropic (Claude)";
-"供应商.Google" = "Google (Gemini)";
-"供应商.Moonshot" = "Moonshot (Kimi)";
-"供应商.Volcengine" = "Volcengine (Doubao)";
-"供应商.Alibaba" = "Alibaba (Tongyi)";
-"供应商.Baidu" = "Baidu (Wenxin)";
-"供应商.Tencent" = "Tencent (Hunyuan)";
+"供应商.Anthropic" = "Anthropic";
+"供应商.Google" = "Google";
+"供应商.Moonshot" = "Moonshot";
+"供应商.Volcengine" = "Volcengine";
+"供应商.Alibaba" = "Alibaba";
+"供应商.Baidu" = "Baidu";
+"供应商.Tencent" = "Tencent";
 "供应商.Custom" = "Custom";
 
 "确定" = "OK";
+"请输入模型名称" = "Enter model name";
 "请输入供应商名称" = "Enter provider name";
