@@ -118,7 +118,7 @@ struct ModelEditorSheet: View {
                     // Row 4: 自定义供应商名称（仅在选择“自定义”时显示）
                     if selectedVendor == .custom {
                         GridRow(alignment: .center) {
-                            Color.clear
+                            Text("")
                                 .frame(width: labelWidth, alignment: .leading)
                             HStack(spacing: 0) {
                                 TextField(String(localized: "请输入供应商名称"), text: $customVendorName)

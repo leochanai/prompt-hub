@@ -56,6 +56,7 @@
 "供应商.Tencent" = "Tencent";
 "供应商.Custom" = "Custom";
 
+"自定义供应商" = "Custom Provider";
 "确定" = "OK";
 "请输入模型名称" = "Enter model name";
 "请输入供应商名称" = "Enter provider name";
