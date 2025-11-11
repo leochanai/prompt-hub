@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A0B2E637C4DEE727CE39771 /* ModelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2291F07900FE2A24BB8A8A2 /* ModelsView.swift */; };
+		1C866F6A228C25E934D02BAF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA7CE5C11C34917610AA477 /* CardView.swift */; };
+		3CD3CB1329ECAB5A68C4DBCD /* PromptEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FA79B0C279A3C6A184BBC /* PromptEditorSheet.swift */; };
+		3DE1D186725B04A15AFA9782 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D3522C6535B0481F675797 /* SidebarView.swift */; };
+		3FF676F3EA6FB1BB0D4C03A1 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C01ED48D641AA085720FD5 /* AppState.swift */; };
+		4A44C88555FA9E28F36F802B /* ContentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACEAFDCD5B39C46424A663C /* ContentHeader.swift */; };
+		83531396766D425189C4FADE /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002584E41ECD87375F7A8D2B /* RootView.swift */; };
+		84BE62F9A0C4A2E8464FF69E /* PromptsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4924C4D6282514981A07C9E7 /* PromptsView.swift */; };
+		88CEB1FE4F2665BC854C2F2C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939202A362E0AAC4D47D164 /* SettingsView.swift */; };
+		91921A3245E5B970DF89D95D /* TagChips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D1A04CD3FB20C94CA43435 /* TagChips.swift */; };
+		A5C5F3C09A8B19CE1B9D5980 /* PromptHubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F793AF6BE44A066806E503D1 /* PromptHubApp.swift */; };
+		C26B81CA8899E103A8294F61 /* PromptModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0186EF482C2F593083F069 /* PromptModels.swift */; };
+		F08B43B2DE3FF25A274E0404 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785F596389319296316C258B /* Theme.swift */; };
+		F6565F536D4558DA1C0143D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EFD6CA9E931B6E55B10B9F8 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		002584E41ECD87375F7A8D2B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		08D3522C6535B0481F675797 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		1A570C256B3E8915C887D76E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		354FA79B0C279A3C6A184BBC /* PromptEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptEditorSheet.swift; sourceTree = "<group>"; };
+		4924C4D6282514981A07C9E7 /* PromptsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsView.swift; sourceTree = "<group>"; };
+		54C01ED48D641AA085720FD5 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		785F596389319296316C258B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		7939202A362E0AAC4D47D164 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		82D1A04CD3FB20C94CA43435 /* TagChips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagChips.swift; sourceTree = "<group>"; };
+		98D8BA98C1902445058C88E9 /* PromptHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PromptHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE0186EF482C2F593083F069 /* PromptModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptModels.swift; sourceTree = "<group>"; };
+		CAA7CE5C11C34917610AA477 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		DACEAFDCD5B39C46424A663C /* ContentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHeader.swift; sourceTree = "<group>"; };
+		F2291F07900FE2A24BB8A8A2 /* ModelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsView.swift; sourceTree = "<group>"; };
+		F32AEFF368314BF191EF979B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F793AF6BE44A066806E503D1 /* PromptHubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptHubApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		39143E8E7AEB3FAA6C4F2098 = {
+			isa = PBXGroup;
+			children = (
+				B3ED106823F4366811E8EC2B /* app */,
+				B55E5C7A92968E9DF4DB9309 /* Resources */,
+				A3A88EC5ADC28F89647932DF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3C3AFD4BF6F04544A0301A01 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				DACEAFDCD5B39C46424A663C /* ContentHeader.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		4003D3B6535BAACDCA2B59C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AE0186EF482C2F593083F069 /* PromptModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		45B691FA4A4AB93B9D110CC4 /* Prompts */ = {
+			isa = PBXGroup;
+			children = (
+				354FA79B0C279A3C6A184BBC /* PromptEditorSheet.swift */,
+				4924C4D6282514981A07C9E7 /* PromptsView.swift */,
+				82D1A04CD3FB20C94CA43435 /* TagChips.swift */,
+			);
+			path = Prompts;
+			sourceTree = "<group>";
+		};
+		6F59A0029D4E1DCF410162C4 /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				0EFD6CA9E931B6E55B10B9F8 /* Localizable.strings */,
+			);
+			path = Localizations;
+			sourceTree = "<group>";
+		};
+		A3A88EC5ADC28F89647932DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				98D8BA98C1902445058C88E9 /* PromptHub.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B36098B103C9E383DE7C6D77 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7939202A362E0AAC4D47D164 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		B3ED106823F4366811E8EC2B /* app */ = {
+			isa = PBXGroup;
+			children = (
+				54C01ED48D641AA085720FD5 /* AppState.swift */,
+				F793AF6BE44A066806E503D1 /* PromptHubApp.swift */,
+				785F596389319296316C258B /* Theme.swift */,
+				C81684CA718AF76F179BDFE3 /* Components */,
+				4003D3B6535BAACDCA2B59C2 /* Models */,
+				E1FE6CAAC5AF4D5D8B3039AE /* Views */,
+			);
+			path = app;
+			sourceTree = "<group>";
+		};
+		B55E5C7A92968E9DF4DB9309 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6F59A0029D4E1DCF410162C4 /* Localizations */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BA9C642C1BA428A9798126B3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F2291F07900FE2A24BB8A8A2 /* ModelsView.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C81684CA718AF76F179BDFE3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CAA7CE5C11C34917610AA477 /* CardView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E1FE6CAAC5AF4D5D8B3039AE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				002584E41ECD87375F7A8D2B /* RootView.swift */,
+				BA9C642C1BA428A9798126B3 /* Models */,
+				45B691FA4A4AB93B9D110CC4 /* Prompts */,
+				B36098B103C9E383DE7C6D77 /* Settings */,
+				3C3AFD4BF6F04544A0301A01 /* Shared */,
+				F3146B5E27B75584BFEFE4B0 /* Sidebar */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F3146B5E27B75584BFEFE4B0 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				08D3522C6535B0481F675797 /* SidebarView.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B35B6E6F09BB15FA8C7F4621 /* PromptHub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B3AE2DBE6871DB818B6E564 /* Build configuration list for PBXNativeTarget "PromptHub" */;
+			buildPhases = (
+				EEB59BB9849452C201E0C8F0 /* Sources */,
+				899FE04E4EC23A222CC72902 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PromptHub;
+			packageProductDependencies = (
+			);
+			productName = PromptHub;
+			productReference = 98D8BA98C1902445058C88E9 /* PromptHub.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CADACB2CCE8A9B0CF195F5C2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					B35B6E6F09BB15FA8C7F4621 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7EC1760D29531273311B616A /* Build configuration list for PBXProject "PromptHub" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				"zh-Hans",
+			);
+			mainGroup = 39143E8E7AEB3FAA6C4F2098;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B35B6E6F09BB15FA8C7F4621 /* PromptHub */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		899FE04E4EC23A222CC72902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6565F536D4558DA1C0143D8 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EEB59BB9849452C201E0C8F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FF676F3EA6FB1BB0D4C03A1 /* AppState.swift in Sources */,
+				1C866F6A228C25E934D02BAF /* CardView.swift in Sources */,
+				4A44C88555FA9E28F36F802B /* ContentHeader.swift in Sources */,
+				1A0B2E637C4DEE727CE39771 /* ModelsView.swift in Sources */,
+				3CD3CB1329ECAB5A68C4DBCD /* PromptEditorSheet.swift in Sources */,
+				A5C5F3C09A8B19CE1B9D5980 /* PromptHubApp.swift in Sources */,
+				C26B81CA8899E103A8294F61 /* PromptModels.swift in Sources */,
+				84BE62F9A0C4A2E8464FF69E /* PromptsView.swift in Sources */,
+				83531396766D425189C4FADE /* RootView.swift in Sources */,
+				88CEB1FE4F2665BC854C2F2C /* SettingsView.swift in Sources */,
+				3DE1D186725B04A15AFA9782 /* SidebarView.swift in Sources */,
+				91921A3245E5B970DF89D95D /* TagChips.swift in Sources */,
+				F08B43B2DE3FF25A274E0404 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0EFD6CA9E931B6E55B10B9F8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1A570C256B3E8915C887D76E /* en */,
+				F32AEFF368314BF191EF979B /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3C1846E7A06D8CB883B17647 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Config/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.prompthub.app;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		7CAB5551E1B19ECA079B99AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		9E23148D35BFCDFED99742D1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = Config/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.prompthub.app;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C1507607D414C5986D1548CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7EC1760D29531273311B616A /* Build configuration list for PBXProject "PromptHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CAB5551E1B19ECA079B99AB /* Debug */,
+				C1507607D414C5986D1548CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9B3AE2DBE6871DB818B6E564 /* Build configuration list for PBXNativeTarget "PromptHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C1846E7A06D8CB883B17647 /* Debug */,
+				9E23148D35BFCDFED99742D1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CADACB2CCE8A9B0CF195F5C2 /* Project object */;
+}

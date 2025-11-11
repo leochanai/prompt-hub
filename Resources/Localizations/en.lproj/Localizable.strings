@@ -1,0 +1,25 @@
+/* Sidebar */
+"提示词" = "Prompts";
+"大模型" = "Models";
+"设置" = "Settings";
+
+/* Header */
+"搜索" = "Search";
+"新建配置" = "New Config";
+
+/* Subtitles */
+"创建并切换多个模型或供应商配置" = "Create and switch among model or provider configs";
+"集中管理通用与项目级提示词" = "Manage global and project prompts";
+"应用偏好与数据管理" = "App preferences and data";
+
+/* Settings */
+"语言" = "Language";
+"中文" = "Chinese";
+"English" = "English";
+"主题" = "Theme";
+"跟随系统" = "Follow System";
+"浅色" = "Light";
+"深色" = "Dark";
+"软件版本" = "Version";
+"反馈问题" = "Feedback";
+"全部" = "All";
