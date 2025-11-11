@@ -29,11 +29,9 @@ struct PromptsView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ContentHeader(title: SidebarDestination.prompts.titleKey, subtitle: "集中管理通用与项目级提示词", searchText: $appState.searchText) {
+            PromptsFilterBar(filteredCount: filtered.count) {
                 createNew()
             }
-
-            TagChipsBar()
 
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 14) {
@@ -45,6 +43,20 @@ struct PromptsView: View {
                             Button("编辑") { appState.editingPrompt = prompt }
                             Button(role: .destructive) { store.remove(prompt.id) } label: { Text("删除") }
                         }
+                    }
+                    if filtered.isEmpty {
+                        VStack(spacing: 8) {
+                            Text("无匹配结果" as LocalizedStringKey)
+                                .foregroundColor(.secondary)
+                            if !appState.selectedPromptTagIDs.isEmpty {
+                                Button("清除过滤" as LocalizedStringKey) {
+                                    appState.selectedPromptTagIDs.removeAll()
+                                }
+                                .buttonStyle(.bordered)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 40)
                     }
                 }
                 .padding(.horizontal, 16)

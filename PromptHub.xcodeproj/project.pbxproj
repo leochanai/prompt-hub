@@ -16,6 +16,7 @@
 		3FF676F3EA6FB1BB0D4C03A1 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C01ED48D641AA085720FD5 /* AppState.swift */; };
 		4A44C88555FA9E28F36F802B /* ContentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACEAFDCD5B39C46424A663C /* ContentHeader.swift */; };
 		720177EDCE4BE8B9D5A6DBCA /* ModelFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665505E1A28271628D24CA63 /* ModelFilter.swift */; };
+		7F557E66F21CFC887B92DED3 /* PromptsFilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8833FEE1B70A3C56C0B0FF /* PromptsFilterBar.swift */; };
 		83531396766D425189C4FADE /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002584E41ECD87375F7A8D2B /* RootView.swift */; };
 		84BE62F9A0C4A2E8464FF69E /* PromptsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4924C4D6282514981A07C9E7 /* PromptsView.swift */; };
 		88CEB1FE4F2665BC854C2F2C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939202A362E0AAC4D47D164 /* SettingsView.swift */; };
@@ -61,6 +62,7 @@
 		F2291F07900FE2A24BB8A8A2 /* ModelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsView.swift; sourceTree = "<group>"; };
 		F32AEFF368314BF191EF979B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F793AF6BE44A066806E503D1 /* PromptHubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptHubApp.swift; sourceTree = "<group>"; };
+		FE8833FEE1B70A3C56C0B0FF /* PromptsFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsFilterBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				354FA79B0C279A3C6A184BBC /* PromptEditorSheet.swift */,
+				FE8833FEE1B70A3C56C0B0FF /* PromptsFilterBar.swift */,
 				4924C4D6282514981A07C9E7 /* PromptsView.swift */,
 				82D1A04CD3FB20C94CA43435 /* TagChips.swift */,
 			);
@@ -307,6 +310,7 @@
 				3CD3CB1329ECAB5A68C4DBCD /* PromptEditorSheet.swift in Sources */,
 				A5C5F3C09A8B19CE1B9D5980 /* PromptHubApp.swift in Sources */,
 				C26B81CA8899E103A8294F61 /* PromptModels.swift in Sources */,
+				7F557E66F21CFC887B92DED3 /* PromptsFilterBar.swift in Sources */,
 				84BE62F9A0C4A2E8464FF69E /* PromptsView.swift in Sources */,
 				83531396766D425189C4FADE /* RootView.swift in Sources */,
 				88CEB1FE4F2665BC854C2F2C /* SettingsView.swift in Sources */,
