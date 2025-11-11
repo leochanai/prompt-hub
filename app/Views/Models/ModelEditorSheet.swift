@@ -118,18 +118,18 @@ struct ModelEditorSheet: View {
                     // Row 4: 自定义供应商名称（仅在选择“自定义”时显示）
                     if selectedVendor == .custom {
                         GridRow(alignment: .center) {
-                        Text("")
-                            .frame(width: labelWidth, alignment: .leading)
-                        HStack(spacing: 0) {
-                            TextField(String(localized: "请输入供应商名称"), text: $name)
-                                .textFieldStyle(.roundedBorder)
-                            Spacer(minLength: 0)
-                        }
-                        .frame(width: controlWidth, alignment: .leading)
-                        .gridColumnAlignment(.leading)
+                            Color.clear
+                                .frame(width: labelWidth, alignment: .leading)
+                            HStack(spacing: 0) {
+                                TextField(String(localized: "请输入供应商名称"), text: $customVendorName)
+                                    .textFieldStyle(.roundedBorder)
+                                Spacer(minLength: 0)
+                            }
+                            .frame(width: controlWidth, alignment: .leading)
+                            .gridColumnAlignment(.leading)
                         }
 
-                        if !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && name.count > 40 {
+                        if !customVendorName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && customVendorName.count > 40 {
                             GridRow(alignment: .center) {
                                 Color.clear.frame(width: labelWidth)
                                 Text("供应商名称不能超过40个字符" as LocalizedStringKey)
