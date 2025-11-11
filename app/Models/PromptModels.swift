@@ -67,17 +67,19 @@ enum ModelVendor: String, CaseIterable, Codable {
     case alibaba     = "Alibaba"
     case baidu       = "Baidu"
     case tencent     = "Tencent"
+    case custom      = "Custom"
 
     var displayName: String {
         switch self {
         case .openAI:     return "OpenAI"
-        case .anthropic:  return "Anthropic (Claude)"
-        case .google:     return "Google (Gemini)"
-        case .moonshot:   return "Moonshot (Kimi)"
-        case .volcengine: return "Volcengine (豆包)"
-        case .alibaba:    return "Alibaba (通义)"
-        case .baidu:      return "Baidu (文心)"
-        case .tencent:    return "Tencent (混元)"
+        case .anthropic:  return "Anthropic"
+        case .google:     return "Google"
+        case .moonshot:   return "Moonshot"
+        case .volcengine: return "Volcengine"
+        case .alibaba:    return "Alibaba"
+        case .baidu:      return "Baidu"
+        case .tencent:    return "Tencent"
+        case .custom:     return "Custom"
         }
     }
 
@@ -91,6 +93,7 @@ enum ModelVendor: String, CaseIterable, Codable {
         case .alibaba:    return "供应商.Alibaba"
         case .baidu:      return "供应商.Baidu"
         case .tencent:    return "供应商.Tencent"
+        case .custom:     return "供应商.Custom"
         }
     }
 }
@@ -100,14 +103,16 @@ struct ModelConfig: Identifiable, Codable, Hashable {
     var name: String
     var type: ModelType
     var vendor: ModelVendor
+    var customVendorName: String? = nil
     var createdAt: Date
     var updatedAt: Date
 
-    init(id: UUID = UUID(), name: String, type: ModelType, vendor: ModelVendor, createdAt: Date = .now, updatedAt: Date = .now) {
+    init(id: UUID = UUID(), name: String, type: ModelType, vendor: ModelVendor, customVendorName: String? = nil, createdAt: Date = .now, updatedAt: Date = .now) {
         self.id = id
         self.name = name
         self.type = type
         self.vendor = vendor
+        self.customVendorName = customVendorName
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }
@@ -117,6 +122,8 @@ final class ModelStore: ObservableObject {
     @Published var models: [ModelConfig] = []
 
     private let userDefaultsKey = "app.models"
+    private let appSupportFolder = "PromptHub"
+    private let modelsFilename = "models.json"
 
     init() {
         loadModels()
@@ -150,25 +157,50 @@ final class ModelStore: ObservableObject {
     }
 
     private func saveModels() {
-        if let encoded = try? JSONEncoder().encode(models) {
+        guard let encoded = try? JSONEncoder().encode(models) else { return }
+        // 1) Write to Application Support as the primary store
+        do {
+            let url = modelsFileURL()
+            try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try encoded.write(to: url, options: .atomic)
+        } catch {
+            // Fallback: still try to persist in UserDefaults
             UserDefaults.standard.set(encoded, forKey: userDefaultsKey)
         }
+        // Also mirror to UserDefaults for backward compatibility
+        UserDefaults.standard.set(encoded, forKey: userDefaultsKey)
     }
 
     private func loadModels() {
-        guard let data = UserDefaults.standard.data(forKey: userDefaultsKey),
-              let decoded = try? JSONDecoder().decode([ModelConfig].self, from: data) else {
-            models = []
+        // Try file first
+        let url = modelsFileURL()
+        if let data = try? Data(contentsOf: url),
+           let decoded = try? JSONDecoder().decode([ModelConfig].self, from: data) {
+            models = decoded
             return
         }
-        models = decoded
+        // Fallback to UserDefaults
+        if let data = UserDefaults.standard.data(forKey: userDefaultsKey),
+           let decoded = try? JSONDecoder().decode([ModelConfig].self, from: data) {
+            models = decoded
+            // Migrate to file storage for stability
+            saveModels()
+            return
+        }
+        models = []
+    }
+
+    private func modelsFileURL() -> URL {
+        let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+        return base.appendingPathComponent(appSupportFolder, isDirectory: true)
+            .appendingPathComponent(modelsFilename)
     }
 
     private func seedSampleModels() {
         let sampleModels = [
             ModelConfig(name: "Claude", type: .chat, vendor: .anthropic),
             ModelConfig(name: "Doubao-Seed-Code", type: .chat, vendor: .volcengine),
-            ModelConfig(name: "Kimi For Coding", type: .chat, vendor: .moonshot)
+            ModelConfig(name: "Kimi For Coding", type: .code, vendor: .moonshot)
         ]
         models = sampleModels
         saveModels()

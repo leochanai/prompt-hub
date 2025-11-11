@@ -53,5 +53,7 @@
 "供应商.Alibaba" = "Alibaba (Tongyi)";
 "供应商.Baidu" = "Baidu (Wenxin)";
 "供应商.Tencent" = "Tencent (Hunyuan)";
+"供应商.Custom" = "Custom";
 
 "确定" = "OK";
+"请输入供应商名称" = "Enter provider name";

@@ -8,13 +8,14 @@ struct ModelEditorSheet: View {
     @State private var name: String = ""
     @State private var selectedType: ModelType = .chat
     @State private var selectedVendor: ModelVendor = .anthropic
+    @State private var customVendorName: String = ""
     @State private var showingAlert = false
     @State private var alertMessage = ""
 
-    private let labelWidth: CGFloat = 78
-    private let controlWidth: CGFloat = 260
+    private let labelWidth: CGFloat = AppLayout.formLabelWidth
+    private let controlWidth: CGFloat = AppLayout.formFieldWidth
     // macOS 控件风格在分段与弹出按钮左侧存在额外可视空隙，做轻微修正以实现像素级左对齐
-    private let leadingAlignFix: CGFloat = -10
+    private let leadingAlignFix: CGFloat = AppLayout.controlLeadingAlignFix
 
     private var isEditing: Bool {
         appState.editingModel != nil
@@ -22,9 +23,11 @@ struct ModelEditorSheet: View {
 
     private var isValid: Bool {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let vendorOK = selectedVendor != .custom || !customVendorName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         return !trimmedName.isEmpty
             && trimmedName.count <= 40
             && !modelStore.modelExists(withName: trimmedName, excludingId: appState.editingModel?.id)
+            && vendorOK
     }
 
     var body: some View {
@@ -44,8 +47,8 @@ struct ModelEditorSheet: View {
             Divider()
 
             // Content (custom layout, no Form background)
-            VStack(alignment: .leading, spacing: 16) {
-                Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 14) {
+            VStack(alignment: .leading, spacing: AppLayout.gridVSpacing + 2) {
+                Grid(alignment: .leading, horizontalSpacing: AppLayout.gridHSpacing, verticalSpacing: AppLayout.gridVSpacing) {
                     // Name
                     GridRow(alignment: .center) {
                         Text("模型名称" as LocalizedStringKey)
@@ -92,28 +95,38 @@ struct ModelEditorSheet: View {
                         .gridColumnAlignment(.leading)
                     }
 
-                    // Vendor
-                    GridRow(alignment: .center) {
+                    // Vendor (label stays fixed; right side stacks dropdown + optional custom name)
+                    GridRow(alignment: .top) {
                         Text("供应商" as LocalizedStringKey)
                             .frame(width: labelWidth, alignment: .leading)
-                        HStack(spacing: 0) {
-                            Picker("" as LocalizedStringKey, selection: $selectedVendor) {
-                                ForEach(ModelVendor.allCases, id: \.self) { vendor in
-                                    Text(vendor.localizedTitleKey)
-                                        .tag(vendor)
+                        VStack(alignment: .leading, spacing: AppLayout.inlineGroupVSpacing) {
+                            HStack(spacing: 0) {
+                                Picker("" as LocalizedStringKey, selection: $selectedVendor) {
+                                    ForEach(ModelVendor.allCases, id: \.self) { vendor in
+                                        Text(vendor.localizedTitleKey)
+                                            .tag(vendor)
+                                    }
                                 }
+                                .pickerStyle(.menu)
+                                Spacer(minLength: 0)
                             }
-                            .pickerStyle(.menu)
-                            Spacer(minLength: 0)
+                            .padding(.leading, leadingAlignFix)
+
+                            if selectedVendor == .custom {
+                                HStack(spacing: 0) {
+                                    TextField("请输入供应商名称" as LocalizedStringKey, text: $customVendorName)
+                                        .textFieldStyle(.roundedBorder)
+                                    Spacer(minLength: 0)
+                                }
+                                .padding(.leading, leadingAlignFix)
+                            }
                         }
                         .frame(width: controlWidth)
-                        .padding(.leading, leadingAlignFix)
                         .gridColumnAlignment(.leading)
                     }
                 }
-                .padding(.horizontal, 24)
+                .padding(AppLayout.contentPadding)
             }
-            .padding(.vertical, 16)
 
             Spacer()
 
@@ -153,10 +166,16 @@ struct ModelEditorSheet: View {
             name = model.name
             selectedType = model.type
             selectedVendor = model.vendor
+            if model.vendor == .custom {
+                customVendorName = model.customVendorName ?? ""
+            } else {
+                customVendorName = ""
+            }
         } else {
             name = ""
             selectedType = .chat
             selectedVendor = .anthropic
+            customVendorName = ""
         }
     }
 
@@ -176,6 +195,7 @@ struct ModelEditorSheet: View {
                 name: trimmedName,
                 type: selectedType,
                 vendor: selectedVendor,
+                customVendorName: selectedVendor == .custom ? customVendorName.trimmingCharacters(in: .whitespacesAndNewlines) : nil,
                 createdAt: existingModel.createdAt,
                 updatedAt: .now
             )
@@ -183,7 +203,8 @@ struct ModelEditorSheet: View {
             model = ModelConfig(
                 name: trimmedName,
                 type: selectedType,
-                vendor: selectedVendor
+                vendor: selectedVendor,
+                customVendorName: selectedVendor == .custom ? customVendorName.trimmingCharacters(in: .whitespacesAndNewlines) : nil
             )
         }
 

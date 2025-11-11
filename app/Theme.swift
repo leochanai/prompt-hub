@@ -16,6 +16,23 @@ enum AppTheme {
     static let shadow = Color.black.opacity(0.04)
 }
 
+enum AppLayout {
+    // Global paddings for forms/sheets
+    static let contentPadding = EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24)
+
+    // Grid spacing
+    static let gridHSpacing: CGFloat = 12  // label ↔ field
+    static let gridVSpacing: CGFloat = 10  // row ↔ row
+    static let inlineGroupVSpacing: CGFloat = 6 // same-row stacked controls (e.g., vendor + custom name)
+
+    // Column metrics
+    static let formLabelWidth: CGFloat = 78
+    static let formFieldWidth: CGFloat = 260
+
+    // Visual alignment tweak for segmented/popup controls on macOS
+    static let controlLeadingAlignFix: CGFloat = -6
+}
+
 extension View {
     func cardShadow() -> some View {
         shadow(color: AppTheme.shadow, radius: 8, x: 0, y: 2)

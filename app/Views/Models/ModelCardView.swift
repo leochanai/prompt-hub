@@ -18,7 +18,13 @@ struct ModelCardView: View {
                     .foregroundStyle(AppTheme.accent)
             }
 
-            Text(model.vendor.localizedTitleKey)
+            Group {
+                if model.vendor == .custom, let name = model.customVendorName, !name.isEmpty {
+                    Text(name)
+                } else {
+                    Text(model.vendor.localizedTitleKey)
+                }
+            }
                 .font(.system(size: 12))
                 .foregroundStyle(.secondary)
                 .lineLimit(1)

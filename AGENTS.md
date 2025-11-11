@@ -81,3 +81,62 @@ app/
 -  代码签名使用自动模式——如有需要在 Xcode 中设置 Development Team
 -  最低部署版本：macOS 13.0，Swift 5.9
 -  应用类别：Developer Tools
+
+## 全局布局约束（Global Layout）
+- 统一在 `app/Theme.swift` 的 `AppLayout` 中维护；视图中禁止硬编码数值。
+- 参数约定：
+  - `contentPadding = EdgeInsets(top: 16, leading: 24, bottom: 16, trailing: 24)` 表单/弹窗内边距
+  - `gridHSpacing = 12` 左列标签 ↔ 右列控件的水平间距
+  - `gridVSpacing = 10` 上下两行控件的垂直间距
+  - `formLabelWidth = 78` 标签列固定宽度；`formFieldWidth = 260` 控件列固定宽度
+  - `controlLeadingAlignFix = -6` 用于 Segmented/Popup 与 TextField 左边缘的像素级对齐
+- 使用模式（示例，放在任意编辑弹窗/表单）：
+  ```swift
+  VStack(alignment: .leading, spacing: AppLayout.gridVSpacing + 2) {
+    Grid(alignment: .leading,
+         horizontalSpacing: AppLayout.gridHSpacing,
+         verticalSpacing: AppLayout.gridVSpacing) {
+      // 1) 名称
+      GridRow(alignment: .center) {
+        Text("模型名称").frame(width: AppLayout.formLabelWidth, alignment: .leading)
+        HStack(spacing: 0) {
+          TextField("", text: $name); Spacer(minLength: 0)
+        }
+        .frame(width: AppLayout.formFieldWidth)
+        .gridColumnAlignment(.leading)
+      }
+      // 2) 类型（分段控件：图标+文字作为单一按钮）
+      GridRow(alignment: .center) {
+        Text("模型类型").frame(width: AppLayout.formLabelWidth, alignment: .leading)
+        HStack(spacing: 0) {
+          Picker("", selection: $selectedType) { /* Label(icon+text) items */ }
+            .pickerStyle(.segmented)
+          Spacer(minLength: 0)
+        }
+        .frame(width: AppLayout.formFieldWidth)
+        .padding(.leading, AppLayout.controlLeadingAlignFix)
+        .gridColumnAlignment(.leading)
+      }
+      // 3) 供应商 + 自定义（两行，标签不移动）
+      GridRow(alignment: .center) {
+        Text("供应商").frame(width: AppLayout.formLabelWidth, alignment: .leading)
+        HStack(spacing: 0) { Picker("", selection: $vendor) { /* ... */ }; Spacer(minLength: 0) }
+          .frame(width: AppLayout.formFieldWidth)
+          .padding(.leading, AppLayout.controlLeadingAlignFix)
+          .gridColumnAlignment(.leading)
+      }
+      if vendor == .custom {
+        GridRow(alignment: .center) {
+          Color.clear.frame(width: AppLayout.formLabelWidth)
+          HStack(spacing: 0) { TextField("请输入供应商名称", text: $custom); Spacer(minLength: 0) }
+            .frame(width: AppLayout.formFieldWidth)
+        }
+      }
+    }
+  }
+  .padding(AppLayout.contentPadding)
+  ```
+- 规则：
+  - 所有右侧控件统一宽度并左对齐：`HStack { control; Spacer(minLength: 0) }.frame(width: formFieldWidth)`。
+  - 条件字段（如“自定义供应商名称”）独立为下一行，左列用 `Color.clear.frame(width: formLabelWidth)` 占位，避免标签位移。
+  - 分段/下拉必须套用 `padding(.leading, controlLeadingAlignFix)` 与 `gridColumnAlignment(.leading)`。
