@@ -23,3 +23,35 @@
 "软件版本" = "Version";
 "反馈问题" = "Feedback";
 "全部" = "All";
+
+/* Model Types */
+"模型类型.对话" = "Chat";
+"模型类型.编码" = "Coding";
+"模型类型.生图" = "Image";
+"模型类型.视频" = "Video";
+"模型类型.语音" = "Voice";
+
+/* Model Editor */
+"编辑模型配置" = "Edit Model Config";
+"新建模型配置" = "New Model Config";
+"取消" = "Cancel";
+"保存" = "Save";
+"删除" = "Delete";
+"模型名称" = "Model Name";
+"模型类型" = "Model Type";
+"供应商" = "Provider";
+"名称不能超过40个字符" = "Name cannot exceed 40 characters";
+"提示" = "Alert";
+"模型名称已存在，请使用其他名称" = "Model name already exists, please use another name";
+
+/* Vendor Names */
+"供应商.OpenAI" = "OpenAI";
+"供应商.Anthropic" = "Anthropic (Claude)";
+"供应商.Google" = "Google (Gemini)";
+"供应商.Moonshot" = "Moonshot (Kimi)";
+"供应商.Volcengine" = "Volcengine (Doubao)";
+"供应商.Alibaba" = "Alibaba (Tongyi)";
+"供应商.Baidu" = "Baidu (Wenxin)";
+"供应商.Tencent" = "Tencent (Hunyuan)";
+
+"确定" = "OK";

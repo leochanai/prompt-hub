@@ -33,6 +33,18 @@ targets:
         CURRENT_PROJECT_VERSION: 1
         MARKETING_VERSION: 0.1.0
 
+  PromptHubTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: PromptHub
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.prompthub.app.tests
+        CODE_SIGN_STYLE: Automatic
+
 schemes:
   PromptHub:
     build:

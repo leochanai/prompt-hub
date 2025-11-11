@@ -31,6 +31,8 @@ final class AppState: ObservableObject {
     @Published var selectedPromptTagIDs: Set<UUID> = []
     // 当前正在编辑的提示词
     @Published var editingPrompt: PromptTemplate? = nil
+    // 当前正在编辑的模型配置
+    @Published var editingModel: ModelConfig? = nil
 
     // 偏好设置
     @Published var language: AppLanguage

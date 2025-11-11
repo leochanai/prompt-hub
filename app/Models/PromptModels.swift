@@ -30,6 +30,151 @@ struct PromptTemplate: Identifiable, Hashable {
     }
 }
 
+enum ModelType: String, CaseIterable, Codable {
+    case chat    = "chat"
+    case code    = "code"
+    case image   = "image"
+    case video   = "video"
+    case voice   = "voice"
+
+    var titleKey: LocalizedStringKey {
+        switch self {
+        case .chat:  return "模型类型.对话"
+        case .code:  return "模型类型.编码"
+        case .image: return "模型类型.生图"
+        case .video: return "模型类型.视频"
+        case .voice: return "模型类型.语音"
+        }
+    }
+
+    var iconName: String {
+        switch self {
+        case .chat:  return "bubble.left.and.bubble.right"
+        case .code:  return "chevron.left.forwardslash.chevron.right"
+        case .image: return "photo"
+        case .video: return "video"
+        case .voice: return "waveform"
+        }
+    }
+}
+
+enum ModelVendor: String, CaseIterable, Codable {
+    case openAI      = "OpenAI"
+    case anthropic   = "Anthropic"
+    case google      = "Google"
+    case moonshot    = "Moonshot"
+    case volcengine  = "Volcengine"
+    case alibaba     = "Alibaba"
+    case baidu       = "Baidu"
+    case tencent     = "Tencent"
+
+    var displayName: String {
+        switch self {
+        case .openAI:     return "OpenAI"
+        case .anthropic:  return "Anthropic (Claude)"
+        case .google:     return "Google (Gemini)"
+        case .moonshot:   return "Moonshot (Kimi)"
+        case .volcengine: return "Volcengine (豆包)"
+        case .alibaba:    return "Alibaba (通义)"
+        case .baidu:      return "Baidu (文心)"
+        case .tencent:    return "Tencent (混元)"
+        }
+    }
+
+    var localizedTitleKey: LocalizedStringKey {
+        switch self {
+        case .openAI:     return "供应商.OpenAI"
+        case .anthropic:  return "供应商.Anthropic"
+        case .google:     return "供应商.Google"
+        case .moonshot:   return "供应商.Moonshot"
+        case .volcengine: return "供应商.Volcengine"
+        case .alibaba:    return "供应商.Alibaba"
+        case .baidu:      return "供应商.Baidu"
+        case .tencent:    return "供应商.Tencent"
+        }
+    }
+}
+
+struct ModelConfig: Identifiable, Codable, Hashable {
+    let id: UUID
+    var name: String
+    var type: ModelType
+    var vendor: ModelVendor
+    var createdAt: Date
+    var updatedAt: Date
+
+    init(id: UUID = UUID(), name: String, type: ModelType, vendor: ModelVendor, createdAt: Date = .now, updatedAt: Date = .now) {
+        self.id = id
+        self.name = name
+        self.type = type
+        self.vendor = vendor
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+}
+
+final class ModelStore: ObservableObject {
+    @Published var models: [ModelConfig] = []
+
+    private let userDefaultsKey = "app.models"
+
+    init() {
+        loadModels()
+        if models.isEmpty {
+            seedSampleModels()
+        }
+    }
+
+    func upsert(_ model: ModelConfig) {
+        if let index = models.firstIndex(where: { $0.id == model.id }) {
+            var updatedModel = model
+            updatedModel.updatedAt = .now
+            models[index] = updatedModel
+        } else {
+            models.insert(model, at: 0)
+        }
+        saveModels()
+    }
+
+    func remove(_ id: UUID) {
+        models.removeAll { $0.id == id }
+        saveModels()
+    }
+
+    func modelExists(withName name: String, excludingId: UUID? = nil) -> Bool {
+        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        return models.contains { model in
+            model.name.trimmingCharacters(in: .whitespacesAndNewlines).caseInsensitiveCompare(trimmedName) == .orderedSame
+            && model.id != excludingId
+        }
+    }
+
+    private func saveModels() {
+        if let encoded = try? JSONEncoder().encode(models) {
+            UserDefaults.standard.set(encoded, forKey: userDefaultsKey)
+        }
+    }
+
+    private func loadModels() {
+        guard let data = UserDefaults.standard.data(forKey: userDefaultsKey),
+              let decoded = try? JSONDecoder().decode([ModelConfig].self, from: data) else {
+            models = []
+            return
+        }
+        models = decoded
+    }
+
+    private func seedSampleModels() {
+        let sampleModels = [
+            ModelConfig(name: "Claude", type: .chat, vendor: .anthropic),
+            ModelConfig(name: "Doubao-Seed-Code", type: .chat, vendor: .volcengine),
+            ModelConfig(name: "Kimi For Coding", type: .chat, vendor: .moonshot)
+        ]
+        models = sampleModels
+        saveModels()
+    }
+}
+
 final class PromptStore: ObservableObject {
     @Published var tags: [PromptTag] = []
     @Published var prompts: [PromptTemplate] = []
@@ -66,4 +211,3 @@ final class PromptStore: ObservableObject {
         ]
     }
 }
-
