@@ -5,8 +5,6 @@ struct SettingsView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ContentHeader(title: SidebarDestination.settings.titleKey, subtitle: "应用偏好与数据管理", showsAdd: false, searchText: $appState.searchText) {}
-
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 20) {
                     SettingRow(label: "语言") {
@@ -31,7 +29,7 @@ struct SettingsView: View {
 
                     VStack(alignment: .leading, spacing: 6) {
                         Text("软件版本").font(.system(size: 13, weight: .semibold))
-                        Text(AppVersion.currentLine).foregroundStyle(.secondary)
+                        Text(AppVersion.currentLine).foregroundColor(.secondary)
                     }
 
                     Spacer(minLength: 0)
@@ -39,7 +37,7 @@ struct SettingsView: View {
                 .frame(maxWidth: 560, alignment: .leading)
                 Spacer()
             }
-            .padding(16)
+            .padding(AppLayout.contentPadding)
         }
     }
 }

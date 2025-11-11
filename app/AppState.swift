@@ -17,7 +17,7 @@ enum SidebarDestination: String, CaseIterable, Identifiable, Hashable {
 
     var symbol: String {
         switch self {
-        case .prompts: return "text.badge.star" // text-like
+        case .prompts: return "wand.and.stars" // magic wand
         case .models: return "cpu"
         case .settings: return "gearshape"
         }
