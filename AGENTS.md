@@ -89,7 +89,7 @@ app/
   - `gridHSpacing = 12` 左列标签 ↔ 右列控件的水平间距
   - `gridVSpacing = 10` 上下两行控件的垂直间距
   - `formLabelWidth = 78` 标签列固定宽度；`formFieldWidth = 260` 控件列固定宽度
-  - `controlLeadingAlignFix = -6` 用于 Segmented/Popup 与 TextField 左边缘的像素级对齐
+  - `controlLeadingAlignFix = -9` 用于 Segmented/Popup 与 TextField 左边缘的像素级对齐
 - 使用模式（示例，放在任意编辑弹窗/表单）：
   ```swift
   VStack(alignment: .leading, spacing: AppLayout.gridVSpacing + 2) {

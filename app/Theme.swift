@@ -30,7 +30,7 @@ enum AppLayout {
     static let formFieldWidth: CGFloat = 260
 
     // Visual alignment tweak for segmented/popup controls on macOS
-    static let controlLeadingAlignFix: CGFloat = -6
+    static let controlLeadingAlignFix: CGFloat = -9
 }
 
 extension View {

@@ -92,6 +92,7 @@ struct ModelEditorSheet: View {
                             Spacer(minLength: 0)
                         }
                         .frame(width: controlWidth, alignment: .leading)
+                        .padding(.leading, leadingAlignFix)
                         .gridColumnAlignment(.leading)
                     }
 
@@ -110,6 +111,7 @@ struct ModelEditorSheet: View {
                             Spacer(minLength: 0)
                         }
                         .frame(width: controlWidth, alignment: .leading)
+                        .padding(.leading, leadingAlignFix)
                         .gridColumnAlignment(.leading)
                     }
 
