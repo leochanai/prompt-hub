@@ -34,15 +34,6 @@ struct SettingsView: View {
                         Text(AppVersion.currentLine).foregroundStyle(.secondary)
                     }
 
-                    HStack(spacing: 12) {
-                        Link(destination: URL(string: "https://x.com/leochanai")!) {
-                            HStack(spacing: 6) {
-                                Image(systemName: "bird")
-                                Text("反馈问题")
-                            }
-                        }
-                    }
-
                     Spacer(minLength: 0)
                 }
                 .frame(maxWidth: 560, alignment: .leading)

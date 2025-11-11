@@ -10,21 +10,22 @@ struct ModelsView: View {
     ]
 
     var filteredModels: [ModelConfig] {
-        if appState.searchText.isEmpty {
-            return modelStore.models
-        } else {
-            return modelStore.models.filter { model in
-                model.name.localizedCaseInsensitiveContains(appState.searchText)
-            }
+        let text = appState.searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let filter = appState.modelFilter
+        return modelStore.models.filter { m in
+            let textMatch = text.isEmpty || m.name.localizedCaseInsensitiveContains(text)
+            let typeMatch = filter.selectedTypes.isEmpty || filter.selectedTypes.contains(m.type)
+            let vendorMatch = filter.selectedVendors.isEmpty || filter.selectedVendors.contains(m.vendor)
+            return textMatch && typeMatch && vendorMatch
         }
     }
 
     var body: some View {
         VStack(spacing: 0) {
-            ContentHeader(title: SidebarDestination.models.titleKey, subtitle: "创建并切换多个模型或供应商配置", searchText: $appState.searchText) {
+            ModelsFilterBar(filteredCount: filteredModels.count, onAdd: {
                 appState.editingModel = nil
                 showingEditor = true
-            }
+            })
 
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 14) {
@@ -33,6 +34,20 @@ struct ModelsView: View {
                             appState.editingModel = model
                             showingEditor = true
                         }
+                    }
+                    if filteredModels.isEmpty {
+                        VStack(spacing: 8) {
+                            Text("无匹配结果" as LocalizedStringKey)
+                                .foregroundStyle(.secondary)
+                            if !appState.modelFilter.isEmpty {
+                                Button("清除过滤" as LocalizedStringKey) {
+                                    appState.modelFilter = .init()
+                                }
+                                .buttonStyle(.bordered)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 40)
                     }
                 }
                 .padding(.horizontal, 16)

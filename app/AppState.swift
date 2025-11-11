@@ -38,12 +38,21 @@ final class AppState: ObservableObject {
     @Published var language: AppLanguage
     @Published var appearance: AppAppearance
 
+    // 大模型过滤
+    @Published var modelFilter: ModelFilter = .init() { didSet { persistModelFilter() } }
+
     init() {
         // 从用户默认加载设置
         let langRaw = UserDefaults.standard.string(forKey: UserDefaultsKeys.language) ?? AppLanguage.zhHans.rawValue
         let appRaw = UserDefaults.standard.string(forKey: UserDefaultsKeys.appearance) ?? AppAppearance.system.rawValue
         self.language = AppLanguage(rawValue: langRaw) ?? .zhHans
         self.appearance = AppAppearance(rawValue: appRaw) ?? .system
+
+        // 读取模型过滤器
+        if let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.modelsFilter),
+           let decoded = try? JSONDecoder().decode(ModelFilter.self, from: data) {
+            self.modelFilter = decoded
+        }
     }
 
     func setLanguage(_ value: AppLanguage) {
@@ -54,6 +63,12 @@ final class AppState: ObservableObject {
     func setAppearance(_ value: AppAppearance) {
         appearance = value
         UserDefaults.standard.set(value.rawValue, forKey: UserDefaultsKeys.appearance)
+    }
+
+    func persistModelFilter() {
+        if let data = try? JSONEncoder().encode(modelFilter) {
+            UserDefaults.standard.set(data, forKey: UserDefaultsKeys.modelsFilter)
+        }
     }
 }
 
@@ -80,4 +95,5 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 enum UserDefaultsKeys {
     static let language = "app.language"
     static let appearance = "app.appearance"
+    static let modelsFilter = "models.filter"
 }

@@ -21,7 +21,6 @@
 "浅色" = "Light";
 "深色" = "Dark";
 "软件版本" = "Version";
-"反馈问题" = "Feedback";
 "全部" = "All";
 
 /* Model Types */
@@ -60,3 +59,6 @@
 "确定" = "OK";
 "请输入模型名称" = "Enter model name";
 "请输入供应商名称" = "Enter provider name";
+"清除过滤" = "Clear Filters";
+"无匹配结果" = "No results";
+"模型" = "Models";
