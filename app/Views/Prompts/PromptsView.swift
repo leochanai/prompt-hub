@@ -9,8 +9,10 @@ struct PromptsView: View {
     private var filtered: [PromptTemplate] {
         let text = appState.searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let selectedTags = appState.selectedPromptTagIDs
+        let typeSel = appState.promptsSelectedType
 
         return store.prompts.filter { p in
+            // search
             let textMatch: Bool
             if text.isEmpty { textMatch = true }
             else {
@@ -19,11 +21,22 @@ struct PromptsView: View {
                             p.content.lowercased().contains(text)
             }
 
+            // tags (AND)
             let tagMatch: Bool
             if selectedTags.isEmpty { tagMatch = true }
             else { tagMatch = selectedTags.isSubset(of: Set(p.tags)) }
 
-            return textMatch && tagMatch
+            // model type
+            let typeMatch: Bool
+            if let ts = typeSel {
+                // 指定类型时：匹配该类型或通用(nil)
+                typeMatch = (p.preferredType == nil) || (p.preferredType == ts)
+            } else {
+                // 全部
+                typeMatch = true
+            }
+
+            return textMatch && tagMatch && typeMatch
         }
     }
 

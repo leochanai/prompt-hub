@@ -41,6 +41,9 @@ final class AppState: ObservableObject {
     // 大模型过滤
     @Published var modelFilter: ModelFilter = .init() { didSet { persistModelFilter() } }
 
+    // 提示词：模型类型分段过滤（nil 表示全部）
+    @Published var promptsSelectedType: ModelType? = nil { didSet { persistPromptsTypeFilter() } }
+
     init() {
         // 从用户默认加载设置
         let langRaw = UserDefaults.standard.string(forKey: UserDefaultsKeys.language) ?? AppLanguage.zhHans.rawValue
@@ -52,6 +55,11 @@ final class AppState: ObservableObject {
         if let data = UserDefaults.standard.data(forKey: UserDefaultsKeys.modelsFilter),
            let decoded = try? JSONDecoder().decode(ModelFilter.self, from: data) {
             self.modelFilter = decoded
+        }
+
+        // 读取提示词模型类型过滤（缺省为全部）
+        if let typeRaw = UserDefaults.standard.string(forKey: UserDefaultsKeys.promptsTypeFilter) {
+            self.promptsSelectedType = ModelType(rawValue: typeRaw)
         }
     }
 
@@ -69,6 +77,11 @@ final class AppState: ObservableObject {
         if let data = try? JSONEncoder().encode(modelFilter) {
             UserDefaults.standard.set(data, forKey: UserDefaultsKeys.modelsFilter)
         }
+    }
+
+    private func persistPromptsTypeFilter() {
+        if let t = promptsSelectedType { UserDefaults.standard.set(t.rawValue, forKey: UserDefaultsKeys.promptsTypeFilter) }
+        else { UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.promptsTypeFilter) }
     }
 }
 
@@ -96,4 +109,5 @@ enum UserDefaultsKeys {
     static let language = "app.language"
     static let appearance = "app.appearance"
     static let modelsFilter = "models.filter"
+    static let promptsTypeFilter = "prompts.type.filter"
 }

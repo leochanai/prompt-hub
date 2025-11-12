@@ -11,13 +11,24 @@ struct PromptsFilterBar: View {
 
     private var tagsTitle: Text {
         let base = Text("标签" as LocalizedStringKey)
-        if selectedCount > 0 { return base + Text(" · \\ (selectedCount)") }
+        if selectedCount > 0 { return base + Text(" · \(selectedCount)") }
         return base
     }
 
     var body: some View {
         HStack(spacing: 12) {
-            // Left: Tag filter menu
+            // Left: Model type segmented
+            Picker("", selection: $appState.promptsSelectedType) {
+                Text("全部" as LocalizedStringKey).tag(ModelType?.none)
+                ForEach(ModelType.allCases, id: \.self) { type in
+                    Label { Text(type.titleKey) } icon: { Image(systemName: type.iconName) }
+                        .tag(ModelType?.some(type))
+                }
+            }
+            .pickerStyle(.segmented)
+            .frame(maxWidth: 420, alignment: .leading)
+
+            // Tag filter menu
             Menu {
                 ForEach(store.tags) { tag in
                     Toggle(isOn: binding(for: tag)) {
@@ -46,7 +57,7 @@ struct PromptsFilterBar: View {
                 .frame(maxWidth: 260)
 
             // Count
-            (Text("提示词" as LocalizedStringKey) + Text(" · \\(filteredCount)"))
+            (Text("提示词" as LocalizedStringKey) + Text(" · \(filteredCount)"))
                 .foregroundColor(.secondary)
 
             // Clear
@@ -94,4 +105,3 @@ struct PromptsFilterBar: View {
         )
     }
 }
-
