@@ -1,6 +1,6 @@
-# CLAUDE.md
+# WARP.md
 
-此文件为 Claude Code 在处理本仓库代码时提供指导。
+此文件为 Warp 在处理本仓库代码时提供指导。
 
 ## 项目概览
 
@@ -14,7 +14,7 @@ xcodegen generate
 
 # 命令行构建
 xcodebuild -scheme PromptHub -configuration Debug -destination 'platform=macOS' build
-Ç
+
 # 运行测试
 xcodebuild test -scheme PromptHub -destination 'platform=macOS'
 

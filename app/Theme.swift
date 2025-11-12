@@ -31,6 +31,10 @@ enum AppLayout {
 
     // Visual alignment tweak for segmented/popup controls on macOS
     static let controlLeadingAlignFix: CGFloat = -9
+
+    // Default window size (first launch / new window)
+    static let defaultWindowWidth: CGFloat = 1200
+    static let defaultWindowHeight: CGFloat = 800
 }
 
 extension View {

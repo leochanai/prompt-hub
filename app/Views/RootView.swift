@@ -10,7 +10,7 @@ struct RootView: View {
                 .navigationSplitViewColumnWidth(240)
         } detail: {
             Group {
-                switch appState.selection ?? .models {
+                switch appState.selection ?? .prompts {
                 case .prompts:
                     PromptsView()
                 case .models:

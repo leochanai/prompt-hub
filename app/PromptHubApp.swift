@@ -16,5 +16,6 @@ struct PromptHubApp: App {
                 .preferredColorScheme(appState.appearance.colorScheme)
                 .id("lang:\(appState.language.rawValue)|theme:\(appState.appearance.rawValue)")
         }
+        .defaultSize(width: AppLayout.defaultWindowWidth, height: AppLayout.defaultWindowHeight)
     }
 }

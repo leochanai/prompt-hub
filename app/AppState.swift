@@ -25,7 +25,7 @@ enum SidebarDestination: String, CaseIterable, Identifiable, Hashable {
 }
 
 final class AppState: ObservableObject {
-    @Published var selection: SidebarDestination? = .models
+    @Published var selection: SidebarDestination? = .prompts { didSet { persistSelection() } }
     @Published var searchText: String = ""
     // 选中的提示词标签（按 id 存储避免循环依赖）
     @Published var selectedPromptTagIDs: Set<UUID> = []
@@ -61,6 +61,12 @@ final class AppState: ObservableObject {
         if let typeRaw = UserDefaults.standard.string(forKey: UserDefaultsKeys.promptsTypeFilter) {
             self.promptsSelectedType = ModelType(rawValue: typeRaw)
         }
+
+        // 读取上次的侧边栏选中项（缺省为提示词）
+        if let selRaw = UserDefaults.standard.string(forKey: UserDefaultsKeys.selection),
+           let sel = SidebarDestination(rawValue: selRaw) {
+            self.selection = sel
+        }
     }
 
     func setLanguage(_ value: AppLanguage) {
@@ -82,6 +88,11 @@ final class AppState: ObservableObject {
     private func persistPromptsTypeFilter() {
         if let t = promptsSelectedType { UserDefaults.standard.set(t.rawValue, forKey: UserDefaultsKeys.promptsTypeFilter) }
         else { UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.promptsTypeFilter) }
+    }
+
+    private func persistSelection() {
+        if let s = selection { UserDefaults.standard.set(s.rawValue, forKey: UserDefaultsKeys.selection) }
+        else { UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.selection) }
     }
 }
 
@@ -110,4 +121,5 @@ enum UserDefaultsKeys {
     static let appearance = "app.appearance"
     static let modelsFilter = "models.filter"
     static let promptsTypeFilter = "prompts.type.filter"
+    static let selection = "app.selection"
 }
