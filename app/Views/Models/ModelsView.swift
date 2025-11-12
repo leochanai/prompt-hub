@@ -15,7 +15,16 @@ struct ModelsView: View {
         return modelStore.models.filter { m in
             let textMatch = text.isEmpty || m.name.localizedCaseInsensitiveContains(text)
             let typeMatch = filter.selectedTypes.isEmpty || filter.selectedTypes.contains(m.type)
-            let vendorMatch = filter.selectedVendors.isEmpty || filter.selectedVendors.contains(m.vendor)
+            let vendorMatch: Bool = {
+                // When no vendor filters applied at all, pass
+                if filter.selectedVendors.isEmpty && filter.selectedCustomVendorNames.isEmpty { return true }
+                if m.vendor == .custom {
+                    let name = (m.customVendorName ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+                    return !name.isEmpty && filter.selectedCustomVendorNames.contains(name)
+                } else {
+                    return filter.selectedVendors.contains(m.vendor)
+                }
+            }()
             return textMatch && typeMatch && vendorMatch
         }
     }
