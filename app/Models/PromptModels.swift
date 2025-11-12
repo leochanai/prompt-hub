@@ -1,4 +1,5 @@
 import SwiftUI
+import Foundation
 
 struct PromptTag: Identifiable, Hashable {
     let id: UUID
@@ -15,21 +16,53 @@ struct PromptTag: Identifiable, Hashable {
 struct PromptTemplate: Identifiable, Hashable {
     let id: UUID
     var title: String
-    var summary: String
     var content: String
     var tags: [UUID] // tag ids
-    // 可选：偏好的模型类型；nil 表示通用（对所有类型可见）
-    var preferredType: ModelType? = nil
+    // 来源链接（允许为空字符串）
+    var sourceURL: String
+    // 关联模型，可为空（未选择模型）
+    var modelId: UUID?
     var updatedAt: Date
+    // 持久化的本地媒体
+    var media: [PromptMedia] = []
 
-    init(id: UUID = UUID(), title: String, summary: String, content: String, tags: [UUID], preferredType: ModelType? = nil, updatedAt: Date = .now) {
+    init(
+        id: UUID = UUID(),
+        title: String,
+        content: String,
+        tags: [UUID],
+        sourceURL: String = "",
+        modelId: UUID? = nil,
+        updatedAt: Date = .now
+    ) {
         self.id = id
         self.title = title
-        self.summary = summary
         self.content = content
         self.tags = tags
-        self.preferredType = preferredType
+        self.sourceURL = sourceURL
+        self.modelId = modelId
         self.updatedAt = updatedAt
+        self.media = []
+    }
+}
+
+enum PromptMediaType: String, Codable, Hashable {
+    case image
+    case video
+}
+
+struct PromptMedia: Identifiable, Codable, Hashable {
+    let id: UUID
+    var type: PromptMediaType
+    // 相对 Application Support/PromptHub/media 的相对路径
+    var relativePath: String
+    var createdAt: Date
+
+    init(id: UUID = UUID(), type: PromptMediaType, relativePath: String, createdAt: Date = .now) {
+        self.id = id
+        self.type = type
+        self.relativePath = relativePath
+        self.createdAt = createdAt
     }
 }
 
@@ -239,10 +272,10 @@ final class PromptStore: ObservableObject {
 
         // sample prompts
         prompts = [
-            PromptTemplate(title: "系统提示词", summary: "通用系统 / 安全边界", content: "你是一个…", tags: [tSys.id], preferredType: .chat),
-            PromptTemplate(title: "代码评审", summary: "PR 审阅要点与风格", content: "请审阅以下代码…", tags: [tCode.id], preferredType: .code),
-            PromptTemplate(title: "产品需求澄清", summary: "澄清需求与验收标准", content: "请根据以下需求…", tags: [tProd.id], preferredType: .chat),
-            PromptTemplate(title: "营销文案", summary: "邮件/社媒/落地页", content: "请撰写…", tags: [tMkt.id], preferredType: .chat)
+            PromptTemplate(title: "系统提示词", content: "你是一个…", tags: [tSys.id]),
+            PromptTemplate(title: "代码评审", content: "请审阅以下代码…", tags: [tCode.id]),
+            PromptTemplate(title: "产品需求澄清", content: "请根据以下需求…", tags: [tProd.id]),
+            PromptTemplate(title: "营销文案", content: "请撰写…", tags: [tMkt.id])
         ]
     }
 }

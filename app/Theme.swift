@@ -28,6 +28,8 @@ enum AppLayout {
     // Column metrics
     static let formLabelWidth: CGFloat = 78
     static let formFieldWidth: CGFloat = 260
+    // Wider controls for editor/dialog contexts
+    static let formFieldWidthWide: CGFloat = 460
 
     // Visual alignment tweak for segmented/popup controls on macOS
     static let controlLeadingAlignFix: CGFloat = -9
@@ -35,6 +37,19 @@ enum AppLayout {
     // Default window size (first launch / new window)
     static let defaultWindowWidth: CGFloat = 1200
     static let defaultWindowHeight: CGFloat = 800
+
+    // Section spacing for stacked cards within sheets
+    static let sectionSpacing: CGFloat = 14
+    // Breakpoint hint for responsive layouts (not strictly enforced)
+    static let twoColumnBreakpoint: CGFloat = 900
+
+    // Editor and preview metrics
+    static let editorMinHeight: CGFloat = 280
+    static let previewCompareHeight: CGFloat = 220
+    static let mediaDropMinHeight: CGFloat = 120
+    static let thumbMinWidth: CGFloat = 120
+    static let thumbHeight: CGFloat = 90
+    static let colorSwatchSize: CGFloat = 20
 }
 
 extension View {

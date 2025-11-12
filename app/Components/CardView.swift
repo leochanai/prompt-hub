@@ -14,9 +14,9 @@ struct CardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(card.title)
+            Text(verbatim: card.title)
                 .font(.system(size: 15, weight: .semibold))
-            Text(card.subtitle)
+            Text(verbatim: card.subtitle)
                 .font(.system(size: 12))
                 .foregroundStyle(.secondary)
 

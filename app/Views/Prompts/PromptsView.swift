@@ -3,6 +3,7 @@ import SwiftUI
 struct PromptsView: View {
     @EnvironmentObject private var appState: AppState
     @EnvironmentObject private var store: PromptStore
+    @EnvironmentObject private var modelStore: ModelStore
 
     private let columns = [GridItem(.adaptive(minimum: 260), spacing: 14, alignment: .top)]
 
@@ -17,7 +18,6 @@ struct PromptsView: View {
             if text.isEmpty { textMatch = true }
             else {
                 textMatch = p.title.lowercased().contains(text) ||
-                            p.summary.lowercased().contains(text) ||
                             p.content.lowercased().contains(text)
             }
 
@@ -26,13 +26,17 @@ struct PromptsView: View {
             if selectedTags.isEmpty { tagMatch = true }
             else { tagMatch = selectedTags.isSubset(of: Set(p.tags)) }
 
-            // model type
+            // model type（仅当提示词选择了具体模型时才参与类型过滤）
             let typeMatch: Bool
             if let ts = typeSel {
-                // 指定类型时：匹配该类型或通用(nil)
-                typeMatch = (p.preferredType == nil) || (p.preferredType == ts)
+                if let mid = p.modelId, let model = modelStore.models.first(where: { $0.id == mid }) {
+                    typeMatch = model.type == ts
+                } else {
+                    // 未选择模型的提示词在特定类型筛选下不显示
+                    typeMatch = false
+                }
             } else {
-                // 全部
+                // 选择“全部”时不过滤
                 typeMatch = true
             }
 
@@ -49,7 +53,7 @@ struct PromptsView: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 14) {
                     ForEach(filtered) { prompt in
-                        CardView(card: Card(title: prompt.title, subtitle: prompt.summary)) {
+                        CardView(card: Card(title: prompt.title, subtitle: subtitle(for: prompt))) {
                             appState.editingPrompt = prompt
                         }
                         .contextMenu {
@@ -81,12 +85,17 @@ struct PromptsView: View {
                 if delete { store.remove(item.id) }
                 else { store.upsert(updated) }
             }
-            .frame(minWidth: 560, minHeight: 460)
+            .frame(minWidth: 920, minHeight: 680)
         }
     }
 
     private func createNew() {
-        let new = PromptTemplate(title: "未命名提示词", summary: "", content: "", tags: [])
+        let new = PromptTemplate(title: "未命名提示词", content: "", tags: [])
         appState.editingPrompt = new
+    }
+
+    private func subtitle(for p: PromptTemplate) -> String {
+        let firstLine = p.content.split(whereSeparator: { $0.isNewline }).first
+        return firstLine.map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) } ?? ""
     }
 }
